@@ -1,11 +1,7 @@
 from django.contrib import admin
-from .models import User, Patient, Doctor, Staff, Appointment, MedicalRecord, Invoice, Inventory, EmergencyCase
+from .models import Patient, Doctor, Staff, Appointment, MedicalRecord, Invoice, Inventory, EmergencyCase
 
 # Register your models here.
-@admin.register(User)
-class User(admin.ModelAdmin):
-    list_display = ['username','role']
-    list_per_page = 10
     
 @admin.register(Patient)
 class PatientAdmin(admin.ModelAdmin):

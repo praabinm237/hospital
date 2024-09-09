@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     'django_seed',
     'rest_framework',
     'drf_yasg',
+    'rest_framework.authtoken',
     'hospital',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +137,24 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS' : {
+        'Bearer' : {'type' : 'apiKey', 'name' : 'Authorization', 'in' : 'header',}
+    }
+}
+
+AUTH_USER_MODEL = 'core.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = 'b5232126e3dc10'
+EMAIL_HOST_PASSWORD = '2122485cb33185'

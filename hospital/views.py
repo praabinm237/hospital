@@ -1,6 +1,5 @@
-from django.shortcuts import render,get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework import mixins, generics
+from .permissions import CustomPermission
 from .models import (
     Patient,
     Doctor,
@@ -32,7 +31,7 @@ class PatientList(
     
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -49,7 +48,7 @@ class PatientDetail(
     
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -65,10 +64,9 @@ class DoctorList(
     mixins.ListModelMixin,
     mixins.CreateModelMixin
     ):
-    
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -85,7 +83,7 @@ class DoctorDetail(
     
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -104,7 +102,7 @@ class StaffList(
     
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -121,7 +119,7 @@ class StaffDetail(
     
     queryset = Staff.objects.all()
     serializer_class = StaffSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -140,7 +138,7 @@ class AppointmentList(
     
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -157,7 +155,7 @@ class AppointmentDetail(
     
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -176,7 +174,7 @@ class MedicalRecordList(
     
     queryset = MedicalRecord.objects.all()
     serializer_class = MedicalRecordSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -193,7 +191,7 @@ class MedicalRecordDetail(
     
     queryset = MedicalRecord.objects.all()
     serializer_class = MedicalRecordSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -212,7 +210,7 @@ class InvoiceList(
     
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -229,7 +227,7 @@ class InvoiceDetail(
     
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -248,7 +246,7 @@ class InventoryList(
     
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -265,7 +263,7 @@ class InventoryDetail(
     
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
@@ -284,7 +282,7 @@ class EmergencyCaseList(
     
     queryset = EmergencyCase.objects.all()
     serializer_class = EmergencyCaseSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request):
         return self.list(request)
@@ -301,7 +299,7 @@ class EmergencyCaseDetail(
     
     queryset = EmergencyCase.objects.all()
     serializer_class = EmergencyCaseSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [CustomPermission]
     
     def get(self,request,pk):
         return self.retrieve(request,pk)
