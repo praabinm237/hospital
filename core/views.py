@@ -159,8 +159,7 @@ class UserViewSet(ViewSet):
         method='POST',
     )
     @action(detail=False, methods= ['POST'])
-    def assign_groups(self, request):
-        
+    def assign_groups(self, request): 
         if request.method == 'POST':
             serializer = UserGroupSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
