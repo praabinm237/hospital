@@ -9,6 +9,7 @@ from .models import (
     Invoice,
     Inventory,
     EmergencyCase,
+    DoctorPatient,
 )
 from .serializers import (
     PatientSerializer,
@@ -19,6 +20,7 @@ from .serializers import (
     InvoiceSerializer,
     InventorySerializer,
     EmergencyCaseSerializer,
+    DoctorPatientSerializer,
 )
 
 
@@ -299,6 +301,42 @@ class EmergencyCaseDetail(
     
     queryset = EmergencyCase.objects.all()
     serializer_class = EmergencyCaseSerializer
+    permission_classes = [CustomPermission]
+    
+    def get(self,request,pk):
+        return self.retrieve(request,pk)
+    
+    def put(self,request,pk):
+        return self.update(request,pk)
+    
+    def delete(self,request,pk):
+        return self.destroy(request,pk)
+    
+class DoctorPatientList(
+    generics.GenericAPIView,
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin
+    ):
+    
+    queryset = DoctorPatient.objects.all()
+    serializer_class = DoctorPatientSerializer
+    permission_classes = [CustomPermission]
+    
+    def get(self,request):
+        return self.list(request)
+        
+    def post(self,request):
+        return self.create(request)
+      
+class DoctorPatientDetail(
+    generics.GenericAPIView,
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin
+    ):
+    
+    queryset = DoctorPatient.objects.all()
+    serializer_class = DoctorPatientSerializer
     permission_classes = [CustomPermission]
     
     def get(self,request,pk):

@@ -168,7 +168,7 @@ class UserViewSet(ViewSet):
             try:
                 user = User.objects.get(email=user)
             except:
-                return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+                return Response({'error': 'User with this email doesn\'t exist'}, status=status.HTTP_404_NOT_FOUND)
             try:
                 group = Group.objects.get(name=group_name)
             except:

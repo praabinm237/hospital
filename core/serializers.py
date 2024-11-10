@@ -93,14 +93,8 @@ class PasswordUpdateSerializer(serializers.Serializer):
         return instance
 
 class UserGroupSerializer(serializers.Serializer):
-    email = serializers.EmailField(max_length=255)
-    groups = serializers.CharField(max_length=50) 
-    
-    def validate_email(self, attrs):
-        user = User.objects.filter(email=attrs.get('email'),).exists()
-        if not user:
-            raise ValidationError({'details': 'Email doesn\'t exist'})
-        return attrs    
+    email = serializers.EmailField()
+    groups = serializers.CharField(max_length=50)  
 
        
 class GroupSerializer(serializers.Serializer):

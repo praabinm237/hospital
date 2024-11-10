@@ -122,6 +122,14 @@ class EmergencyCase(models.Model):
     def __str__(self):
         return f'Emergency case ID #{self.pk}'
     
+class DoctorPatient(models.Model):
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'Doctor : {Doctor.name} Patient : {Patient.name}'
+    
+    
        
     
     

@@ -9,6 +9,7 @@ from .views import (
     InvoiceList, InvoiceDetail,
     InventoryList, InventoryDetail,
     EmergencyCaseList, EmergencyCaseDetail,
+    DoctorPatientList, DoctorPatientDetail,
 )
 
 urlpatterns = [
@@ -28,4 +29,6 @@ urlpatterns = [
     path('inventories/<pk>',InventoryDetail.as_view()),
     path('emergency_cases',EmergencyCaseList.as_view()),
     path('emergency_cases/<pk>',EmergencyCaseDetail.as_view()),
+    path('doctorpatient',DoctorPatientList.as_view()),
+    path('doctorpatient/<pk>',DoctorPatientDetail.as_view()),
 ]

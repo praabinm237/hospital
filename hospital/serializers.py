@@ -8,6 +8,7 @@ from .models import (
     Invoice,
     Inventory,
     EmergencyCase,
+    DoctorPatient
 )
 
 class PatientSerializer(serializers.ModelSerializer):
@@ -49,3 +50,8 @@ class EmergencyCaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = EmergencyCase
         fields = ['id','patient','description','status','date_reported']
+        
+class DoctorPatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DoctorPatient
+        fields = ['doctor','patient']
