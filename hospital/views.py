@@ -22,6 +22,9 @@ from .serializers import (
     EmergencyCaseSerializer,
     DoctorPatientSerializer,
 )
+from django.contrib.auth.models import Group
+from rest_framework import status
+from rest_framework.response import Response
 
 
 # Create your views here.
@@ -36,6 +39,24 @@ class PatientList(
     permission_classes = [CustomPermission]
     
     def get(self,request):
+        user = request.user
+        doctor_group = Group.objects.get(name="Doctor")
+        isDoctor = request.user.groups.contains(doctor_group)
+        if isDoctor:
+            print("doctor")
+
+        return Response(request.user.groups.contains(doctor_group))
+        serializer = PatientSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        doctor_id = serializer.validated_data['groups']
+        try:
+            user = User.objects.get(email=user)
+        except:
+            return Response({'error': 'User with this email doesn\'t exist'}, status=status.HTTP_404_NOT_FOUND)
+        try:
+            group = Group.objects.get(name=group_name)
+        except:
+            return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
         return self.list(request)
         
     def post(self,request):
@@ -317,14 +338,13 @@ class DoctorPatientList(
     mixins.ListModelMixin,
     mixins.CreateModelMixin
     ):
-    
     queryset = DoctorPatient.objects.all()
     serializer_class = DoctorPatientSerializer
     permission_classes = [CustomPermission]
-    
+        
     def get(self,request):
         return self.list(request)
-        
+            
     def post(self,request):
         return self.create(request)
       
