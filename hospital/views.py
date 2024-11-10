@@ -40,24 +40,15 @@ class PatientList(
     
     def get(self,request):
         user = request.user
-        doctor_group = Group.objects.get(name="Doctor")
-        isDoctor = request.user.groups.contains(doctor_group)
+        doctor = Doctor.objects.get(first_name="Tony")
+        doctorGroup = Group.objects.get(name="Doctor")
+        isDoctor = request.user.groups.contains(doctorGroup)
         if isDoctor:
-            print("doctor")
-
-        return Response(request.user.groups.contains(doctor_group))
-        serializer = PatientSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        doctor_id = serializer.validated_data['groups']
-        try:
-            user = User.objects.get(email=user)
-        except:
-            return Response({'error': 'User with this email doesn\'t exist'}, status=status.HTTP_404_NOT_FOUND)
-        try:
-            group = Group.objects.get(name=group_name)
-        except:
-            return Response({'error': 'Group not found'}, status=status.HTTP_404_NOT_FOUND)
-        return self.list(request)
+            doctorPatients = DoctorPatient.objects.filter(doctor=doctor)
+            patients = Patient.objects.get_queryset(doctorPatients.patient)
+            # patients = patients.objects.all
+            serializer = PatientSerializer(patients,many=True)
+            return Response(serializer.data)
         
     def post(self,request):
         return self.create(request)
